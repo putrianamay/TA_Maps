@@ -44,10 +44,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
 assets:
-  - assets/destination_map_marker.png
-  - assets/driving_pin.png
-  - assets/friend1.jpg
-  - assets/friend2.jpg
+  - Tugas/TA_Maps/assets/destination_map_marker.bmp
+  - Tugas/TA_Maps/assets/driving_pin.bmp
+  - Tugas/TA_Maps/assets/friend1.bmp
+  - Tugas/TA_Maps/assets/friend2.bmp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

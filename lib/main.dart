@@ -9,8 +9,8 @@ import 'package:TA_Maps/models/pin_pill_info.dart';
 const double CAMERA_ZOOM = 16;
 const double CAMERA_TILT = 80;
 const double CAMERA_BEARING = 30;
-const LatLng SOURCE_LOCATION = LatLng(-6.327419, 106.753543);
-const LatLng DEST_LOCATION = LatLng(-6.333178, 106.758428);
+const LatLng SOURCE_LOCATION = LatLng(-6.330727, 106.755581);
+const LatLng DEST_LOCATION = LatLng(-6.328226, 106.721834);
 
 void main() =>
     runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MapPage()));
@@ -29,7 +29,7 @@ class MapPageState extends State<MapPage> {
   List<LatLng> polylineCoordinates = [];
   PolylinePoints polylinePoints;
 
-  String googleAPIKey = '<API_KEY>';
+  String googleAPIKey = "AIzaSyDQy2XAFOfHZCAjnA3U4GsD8N8J39WKzZA";
 
   // for my custom marker pins
   BitmapDescriptor sourceIcon;
@@ -80,14 +80,14 @@ class MapPageState extends State<MapPage> {
   }
 
   void setSourceAndDestinationIcons() async {
-    BitmapDescriptor.fromAssetImage(
-            ImageConfiguration(devicePixelRatio: 2.0), 'assets/driving_pin.png')
+    BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.0),
+            "Tugas/TA_Maps/assets/driving_pin.bmp")
         .then((onValue) {
       sourceIcon = onValue;
     });
 
     BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.0),
-            'assets/destination_map_marker.png')
+            "Tugas/TA_Maps/assets/destination_map_marker.bmp")
         .then((onValue) {
       destinationIcon = onValue;
     });
@@ -123,7 +123,7 @@ class MapPageState extends State<MapPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Google Maps Flutter'),
+        title: Text('Go-Tahu'),
       ),
       body: Stack(
         children: <Widget>[
@@ -166,15 +166,15 @@ class MapPageState extends State<MapPage> {
     sourcePinInfo = PinInformation(
         locationName: "Start Location",
         location: SOURCE_LOCATION,
-        pinPath: "assets/driving_pin.png",
-        avatarPath: "assets/friend1.jpg",
+        pinPath: "Tugas/TA_Maps/assets/driving_pin.bmp",
+        avatarPath: "Tugas/assets/friend1.bmp",
         labelColor: Colors.blueAccent);
 
     destinationPinInfo = PinInformation(
         locationName: "End Location",
         location: DEST_LOCATION,
-        pinPath: "assets/destination_map_marker.png",
-        avatarPath: "assets/friend2.jpg",
+        pinPath: "Tugas/TA_Maps/assets/destination_map_marker.bmp",
+        avatarPath: "Tugas/TA_Maps/assets/friend2.bmp",
         labelColor: Colors.purple);
 
     // add the initial source location pin
@@ -221,7 +221,7 @@ class MapPageState extends State<MapPage> {
 
       setState(() {
         _polylines.add(Polyline(
-            width: 2, // set the width of the polylines
+            width: 10, // set the width of the polylines
             polylineId: PolylineId("poly"),
             color: Color.fromARGB(255, 40, 122, 198),
             points: polylineCoordinates));
