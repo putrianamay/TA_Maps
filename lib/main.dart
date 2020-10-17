@@ -1,21 +1,346 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:location/location.dart';
 import 'dart:async';
-import 'package:TA_Maps/components/map_pin_pill.dart';
-import 'package:TA_Maps/models/pin_pill_info.dart';
-
-const double CAMERA_ZOOM = 16;
-const double CAMERA_TILT = 80;
-const double CAMERA_BEARING = 30;
-const LatLng SOURCE_LOCATION = LatLng(-6.330727, 106.755581);
-const LatLng DEST_LOCATION = LatLng(-6.328226, 106.721834);
 
 void main() =>
     runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MapPage()));
 
+const double CAMERA_ZOOM = 13;
+const double CAMERA_TILT = 0;
+const double CAMERA_BEARING = 30;
+const LatLng SOURCE_LOCATION = LatLng(-6.330727, 106.755581);
+const LatLng DEST_LOCATION = LatLng(-6.328226, 106.721834);
+
 class MapPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => MyPageState();
+}
+
+class MyPageState extends State<MapPage> {
+  Completer<GoogleMapController> _controller = Completer();
+
+  // this set will hold my markers
+  Set<Marker> _markers = {};
+
+  // this will hold the generated polylines
+  Set<Polyline> _polylines = {};
+
+  // this will hold each polyline coordinate as Lat and Lng pairs
+  /*List<LatLng> polylineCoordinates = [
+    LatLng(-6.330727, 106.755581),
+    LatLng(-6.330727, 106.755560)
+  ];*/
+
+  // this is the key object - the PolylinePoints
+  // which generates every polyline between start and finish
+  PolylinePoints polylinePoints = PolylinePoints();
+
+  String googleAPIKey = "<AIzaSyDQy2XAFOfHZCAjnA3U4GsD8N8J39WKzZA>";
+
+  // for my custom icons
+  BitmapDescriptor sourceIcon;
+  BitmapDescriptor destinationIcon;
+
+  @override
+  void initState() {
+    super.initState();
+    setSourceAndDestinationIcons();
+
+    /* getBytesFromAsset('Tugas/TA_Maps/assets/driving_pin.bmp', 64).then((onValue){
+      sourceIcon =BitmapDescriptor.fromBytes(onValue);
+      });
+
+      getBytesFromAsset('Tugas/TA_Maps/assets/destination_map_marker.bmp', 64).then((onValue){
+      sourceIcon =BitmapDescriptor.fromBytes(onValue);
+      }); */
+  }
+
+  /* static Future<Uint8List> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
+  } */
+
+  void setSourceAndDestinationIcons() async {
+    sourceIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5), 'assets/driving_pin.bmp');
+    destinationIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/destination_map_marker.bmp');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    List<LatLng> latlng = [
+      LatLng(-6.332384, 106.755715),
+      LatLng(-6.332657, 106.755762),
+      LatLng(-6.332902, 106.755805),
+      LatLng(),
+      LatLng(),
+      //nah bagian ini di isi. biar gw kasih contoh dulu
+    ];
+
+    CameraPosition initialLocation = CameraPosition(
+        zoom: CAMERA_ZOOM,
+        bearing: CAMERA_BEARING,
+        tilt: CAMERA_TILT,
+        target: SOURCE_LOCATION);
+    return GoogleMap(
+        myLocationEnabled: true,
+        compassEnabled: true,
+        tiltGesturesEnabled: false,
+        markers: _markers,
+        polylines: _polylines,
+        mapType: MapType.normal,
+        initialCameraPosition: initialLocation,
+        //onMapCreated: onMapCreated);
+
+        onMapCreated: (GoogleMapController controller) {
+          controller.setMapStyle(Utils.mapStyles);
+          _controller.complete(controller);
+          setMapPins();
+          //setPolylines();
+
+          _polylines.add(Polyline(
+              polylineId: PolylineId(_polylines.toString()),
+              visible: true,
+              points: latlng,
+              color: Colors.blue));
+        });
+  }
+
+  /*void onMapCreated(GoogleMapController controller) {
+    controller.setMapStyle(Utils.mapStyles);
+    _controller.complete(controller);
+    setMapPins();   
+    //setPolylines();
+
+        _polylines.add(Polyline(
+          polylineId: PolylineId(_polylines.toString()),
+          visible: true,
+          points: latlng,
+          color: Colors.blue));
+  }*/
+
+  void setPolyLine() {
+    setState(() {});
+  }
+
+  void setMapPins() {
+    setState(() {
+      // source pin
+      _markers.add(Marker(
+          markerId: MarkerId('sourcePin'),
+          position: SOURCE_LOCATION,
+          icon: sourceIcon));
+      // destination pin
+      _markers.add(Marker(
+          markerId: MarkerId('destPin'),
+          position: DEST_LOCATION,
+          icon: destinationIcon));
+    });
+  }
+
+  /*setPolylines() async {
+    List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
+        googleAPIKey,
+        SOURCE_LOCATION.latitude,
+        SOURCE_LOCATION.longitude,
+        DEST_LOCATION.latitude,
+        DEST_LOCATION.longitude);
+    if (result.isNotEmpty) {
+      // loop through all PointLatLng points and convert them
+      // to a list of LatLng, required by the Polyline
+      result.forEach((PointLatLng point) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      });
+    }
+
+    setState(() {
+      // create a Polyline instance
+      // with an id, an RGB color and the list of LatLng pairs
+      Polyline polyline = Polyline(
+          polylineId: PolylineId("poly"),
+          color: Color.fromARGB(255, 40, 122, 198),
+          points: polylineCoordinates);
+
+      // add the constructed polyline as a set of points
+      // to the polyline set, which will eventually
+      // end up showing up on the map
+      _polylines.add(polyline);
+    });
+  }*/
+}
+
+class Utils {
+  static String mapStyles = '''[
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]''';
+}
+
+/* class MapPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => MapPageState();
 }
@@ -432,4 +757,4 @@ class Utils {
     ]
   }
 ]''';
-}
+} */
