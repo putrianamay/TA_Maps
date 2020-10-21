@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -28,15 +25,6 @@ class MyPageState extends State<MapPage> {
 
   // this will hold the generated polylines
   Set<Polyline> _polylines = {};
-
-  // this will hold each polyline coordinate as Lat and Lng pairs
-  /*List<LatLng> polylineCoordinates = [
-    LatLng(-6.330727, 106.755581),
-    LatLng(-6.330727, 106.755560)
-  ];*/
-
-  // this is the key object - the PolylinePoints
-  // which generates every polyline between start and finish
   PolylinePoints polylinePoints = PolylinePoints();
 
   String googleAPIKey = "<AIzaSyDQy2XAFOfHZCAjnA3U4GsD8N8J39WKzZA>";
@@ -49,40 +37,81 @@ class MyPageState extends State<MapPage> {
   void initState() {
     super.initState();
     setSourceAndDestinationIcons();
-
-    /* getBytesFromAsset('Tugas/TA_Maps/assets/driving_pin.bmp', 64).then((onValue){
-      sourceIcon =BitmapDescriptor.fromBytes(onValue);
-      });
-
-      getBytesFromAsset('Tugas/TA_Maps/assets/destination_map_marker.bmp', 64).then((onValue){
-      sourceIcon =BitmapDescriptor.fromBytes(onValue);
-      }); */
+    setMapPins();
+    setPolyLine();
   }
 
-  /* static Future<Uint8List> getBytesFromAsset(String path, int width) async {
-    ByteData data = await rootBundle.load(path);
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
-    ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png)).buffer.asUint8List();
-  } */
+  void setSourceAndDestinationIcons() {
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(devicePixelRatio: 2.5), 'assets/driving_pin.png')
+        .then((onValue) => sourceIcon = onValue);
 
-  void setSourceAndDestinationIcons() async {
-    sourceIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.5), 'assets/driving_pin.bmp');
-    destinationIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.5),
-        'assets/destination_map_marker.bmp');
+    BitmapDescriptor.fromAssetImage(ImageConfiguration(devicePixelRatio: 2.5),
+            'assets/destination_map_marker.png')
+        .then((onValue) => destinationIcon = onValue);
   }
 
   @override
   Widget build(BuildContext context) {
     List<LatLng> latlng = [
-      LatLng(-6.332384, 106.755715),
-      LatLng(-6.332657, 106.755762),
-      LatLng(-6.332902, 106.755805),
-      LatLng(),
-      LatLng(),
-      //nah bagian ini di isi. biar gw kasih contoh dulu
+      LatLng(-6.266848, 106.702363),
+      LatLng(-6.2665167, 106.7021280),
+      LatLng(-6.2662634, 106.7020006),
+      LatLng(-6.2661737, 106.7019307),
+      LatLng(-6.2661210, 106.7018754),
+      LatLng(-6.2660426, 106.7017909),
+      LatLng(-6.2659899, 106.7017153),
+      LatLng(-6.2659092, 106.7016183),
+      LatLng(-6.2658329, 106.7015518),
+      LatLng(-6.2656659, 106.7014288),
+      LatLng(-6.2654810, 106.7013082),
+      LatLng(-6.2653543, 106.7012439),
+      LatLng(-6.2652556, 106.7012067),
+      LatLng(-6.2649709, 106.7011232),
+      LatLng(-6.2648364, 106.7010838),
+      LatLng(-6.2647445, 106.7010420),
+      LatLng(-6.2646570, 106.7009834),
+      LatLng(-6.2645496, 106.7008982),
+      LatLng(-6.2644563, 106.7008075),
+      LatLng(-6.2644103, 106.7007205),
+      LatLng(-6.2643768, 106.7003372),
+      LatLng(-6.2643283, 106.7001800),
+      LatLng(-6.2642177, 106.6999252),
+      LatLng(-6.2641404, 106.6997884),
+      LatLng(-6.2640617, 106.6996966),
+      LatLng(-6.2640177, 106.6996201),
+      LatLng(-6.2635741, 106.6991824),
+      LatLng(-6.2633735, 106.6989264),
+      LatLng(-6.2631219, 106.6987323),
+      LatLng(-6.2622327, 106.6979464),
+      LatLng(-6.2619117, 106.6976983),
+      LatLng(-6.2617634, 106.6975448),
+      LatLng(-6.2615368, 106.6972437),
+      LatLng(-6.2612038, 106.6968336),
+      LatLng(-6.2608059, 106.6969215),
+      LatLng(-6.2605257, 106.6970016),
+      LatLng(-6.2602957, 106.6969647),
+      LatLng(-6.2600952, 106.6969565),
+      LatLng(-6.2599125, 106.6970219),
+      LatLng(-6.2598711, 106.6970861),
+      LatLng(-6.2597811, 106.6971827),
+      LatLng(-6.2596791, 106.6972564),
+      LatLng(-6.2595619, 106.6973124),
+      LatLng(-6.2593439, 106.6973329),
+      LatLng(-6.2591263, 106.6973276),
+      LatLng(-6.2589113, 106.6973657),
+      LatLng(-6.2584327, 106.6974790),
+      LatLng(-6.2583240, 106.6974804),
+      LatLng(-6.2583068, 106.6978087),
+      LatLng(-6.2582500, 106.6980108),
+      LatLng(-6.2582107, 106.6982656),
+      LatLng(-6.2581287, 106.6983038),
+      LatLng(-6.2579259, 106.6983065),
+      LatLng(-6.2578868, 106.6983642),
+      LatLng(-6.2578774, 106.6984339),
+      LatLng(-6.2578496, 106.6984943),
+      LatLng(-6.2578015, 106.6985161),
+      LatLng(-6.2577140, 106.6985103),
     ];
 
     CameraPosition initialLocation = CameraPosition(
@@ -104,28 +133,17 @@ class MyPageState extends State<MapPage> {
           controller.setMapStyle(Utils.mapStyles);
           _controller.complete(controller);
           setMapPins();
-          //setPolylines();
+          setPolyLine();
 
           _polylines.add(Polyline(
-              polylineId: PolylineId(_polylines.toString()),
-              visible: true,
-              points: latlng,
-              color: Colors.blue));
+            polylineId: PolylineId(_polylines.toString()),
+            visible: true,
+            points: latlng,
+            color: Colors.blue,
+            width: 5,
+          ));
         });
   }
-
-  /*void onMapCreated(GoogleMapController controller) {
-    controller.setMapStyle(Utils.mapStyles);
-    _controller.complete(controller);
-    setMapPins();   
-    //setPolylines();
-
-        _polylines.add(Polyline(
-          polylineId: PolylineId(_polylines.toString()),
-          visible: true,
-          points: latlng,
-          color: Colors.blue));
-  }*/
 
   void setPolyLine() {
     setState(() {});
@@ -135,46 +153,20 @@ class MyPageState extends State<MapPage> {
     setState(() {
       // source pin
       _markers.add(Marker(
-          markerId: MarkerId('sourcePin'),
-          position: SOURCE_LOCATION,
-          icon: sourceIcon));
+        markerId: MarkerId('sourcePin'),
+        position: LatLng(-6.266848, 106.702363),
+        infoWindow: InfoWindow(title: 'Jl. Kaliurung'),
+        icon: sourceIcon,
+      ));
       // destination pin
       _markers.add(Marker(
-          markerId: MarkerId('destPin'),
-          position: DEST_LOCATION,
-          icon: destinationIcon));
+        markerId: MarkerId('destPin'),
+        position: LatLng(-6.2577140, 106.6985103),
+        infoWindow: InfoWindow(title: 'Pabrik Tahu Amin'),
+        icon: destinationIcon,
+      ));
     });
   }
-
-  /*setPolylines() async {
-    List<PointLatLng> result = await polylinePoints?.getRouteBetweenCoordinates(
-        googleAPIKey,
-        SOURCE_LOCATION.latitude,
-        SOURCE_LOCATION.longitude,
-        DEST_LOCATION.latitude,
-        DEST_LOCATION.longitude);
-    if (result.isNotEmpty) {
-      // loop through all PointLatLng points and convert them
-      // to a list of LatLng, required by the Polyline
-      result.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
-
-    setState(() {
-      // create a Polyline instance
-      // with an id, an RGB color and the list of LatLng pairs
-      Polyline polyline = Polyline(
-          polylineId: PolylineId("poly"),
-          color: Color.fromARGB(255, 40, 122, 198),
-          points: polylineCoordinates);
-
-      // add the constructed polyline as a set of points
-      // to the polyline set, which will eventually
-      // end up showing up on the map
-      _polylines.add(polyline);
-    });
-  }*/
 }
 
 class Utils {
