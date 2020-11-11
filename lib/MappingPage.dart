@@ -69,6 +69,18 @@ class _MapshowState extends State<Mapshow> {
     bearing: 192.8334901395799,
   );
 
+  Future<void> _gotoTA4() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(TA4));
+  }
+
+  static final CameraPosition TA4 = CameraPosition(
+    target: LatLng(-6.3264147, 106.7629380), //Jl. Talas - Pabrik 4
+    zoom: 18.151926040649414,
+    tilt: 59.440717697143555,
+    bearing: 192.8334901395799,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -125,6 +137,19 @@ class _MapshowState extends State<Mapshow> {
       markerId: MarkerId('Jl. Mawar'),
       position: LatLng(-6.3083565, 106.6943251),
       infoWindow: InfoWindow(title: 'Jl. Mawar'),
+      icon: sourceIcon,
+    );
+
+    Marker pabrik4 = Marker(
+      markerId: MarkerId('Pabrik Tahu Pak Tabah'),
+      position: LatLng(-6.3332968, 106.7584304),
+      infoWindow: InfoWindow(title: 'Pabrik Tahu Pak Tabah'),
+      icon: destinationIcon,
+    );
+    Marker jalantalas = Marker(
+      markerId: MarkerId('Jl. Talas'),
+      position: LatLng(-6.3264147, 106.7629380),
+      infoWindow: InfoWindow(title: 'Jl. Talas'),
       icon: sourceIcon,
     );
 
@@ -187,7 +212,25 @@ class _MapshowState extends State<Mapshow> {
                     ));
                   });
                 },
-              ))
+              )),
+          SpeedDialChild(
+              label: 'Pabrik Tahu Pak Tabah',
+              child: FloatingActionButton(
+                shape: CircleBorder(),
+                child: Image.asset(''),
+                onPressed: () {
+                  _gotoTA4();
+                  setState(() {
+                    _polyline.add(Polyline(
+                      polylineId: PolylineId(_lastMapPosition.toString()),
+                      visible: true,
+                      points: latlngpabrik4,
+                      color: Colors.blue,
+                      width: 5,
+                    ));
+                  });
+                },
+              )),
         ],
       ),
       body: Stack(children: <Widget>[
@@ -201,7 +244,9 @@ class _MapshowState extends State<Mapshow> {
             pabrik2,
             jalanpuspiptek,
             pabrik3,
-            jalanmawar
+            jalanmawar,
+            jalantalas,
+            pabrik4
           },
           polylines: _polyline,
           mapType: MapType.normal,
