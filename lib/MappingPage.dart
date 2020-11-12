@@ -101,7 +101,8 @@ class _MapshowState extends State<Mapshow> {
 
   void setCustomMapPin() async {
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
-        ImageConfiguration(devicePixelRatio: 2.5), 'assets\driving_pin.png');
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/destination_map_marker.png');
     /*destinationIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
         'assets/destination_map_marker.png');*/
@@ -308,6 +309,7 @@ class _MapshowState extends State<Mapshow> {
                 visible: true,
                 position: _lastMapPosition,
                 icon: pinLocationIcon,
+                infoWindow: InfoWindow(title: 'Location'),
               ));
 
               /*_markers.add(Marker(
