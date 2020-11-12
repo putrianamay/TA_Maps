@@ -2,7 +2,7 @@ import 'package:TA_Maps/main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(GMap());
 
 class GMap extends StatefulWidget {
   GMap({Key key}) : super(key: key);
