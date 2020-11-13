@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class MapPage extends StatelessWidget {
-  static const routeName = '/mappingpage';
+  static const routeName = 'MapPage';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +28,7 @@ class _MapshowState extends State<Mapshow> {
   static const LatLng _center = const LatLng(-6.266853, 106.702360); //pabrik 1
   final Set<Polyline> _polyline = {};
 
-  BitmapDescriptor pinLocationIcon; //destinationIcon;
+  BitmapDescriptor pinLocationIcon, destinationIcon;
   Set<Marker> _markers = {};
 
   Completer<GoogleMapController> _controller = Completer();
@@ -42,9 +42,9 @@ class _MapshowState extends State<Mapshow> {
   void setCustomMapPin() async {
     pinLocationIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5), 'assets/driving_pin.png');
-    /*destinationIcon = await BitmapDescriptor.fromAssetImage(
+    destinationIcon = await BitmapDescriptor.fromAssetImage(
         ImageConfiguration(devicePixelRatio: 2.5),
-        'assets/destination_map_marker.png');*/
+        'assets/destination_map_marker.png');
   }
 
   Future<void> _gotoTA1() async {
@@ -117,62 +117,62 @@ class _MapshowState extends State<Mapshow> {
         markerId: MarkerId('PabrikTahuAmin(DY)'),
         position: LatLng(-6.2577140, 106.6985103),
         infoWindow: InfoWindow(title: 'Pabrik Tahun Amin (DY)'),
-        icon: pinLocationIcon //destinationIcon,
+        icon: destinationIcon //destinationIcon,
         );
     Marker jalankalijiun = Marker(
-      markerId: MarkerId('Jl.KaliJiun'),
+      markerId: MarkerId('JlKaliJiun'),
       position: LatLng(-6.266853, 106.702360),
       infoWindow: InfoWindow(title: 'Jl. Kali Jiun'),
       icon: pinLocationIcon,
     );
 
     Marker pabrik2 = Marker(
-        markerId: MarkerId('Pabrik Tahu Na Po Tet'),
+        markerId: MarkerId('PabrikTahuNaPoTet'),
         position: LatLng(-6.3581547, 106.7152890),
         infoWindow: InfoWindow(title: 'Pabrik Tahu Na Po Tet'),
-        icon: pinLocationIcon // destinationIcon,
+        icon: destinationIcon // destinationIcon,
         );
     Marker jalanpuspiptek = Marker(
-      markerId: MarkerId('Jl. Puspiptek'),
+      markerId: MarkerId('JlPuspiptek'),
       position: LatLng(-6.3467426, 106.7103855),
       infoWindow: InfoWindow(title: 'Jl. Puspiptek'),
       icon: pinLocationIcon,
     );
 
     Marker pabrik3 = Marker(
-        markerId: MarkerId('Pabrik Tahu Kita'),
+        markerId: MarkerId('PabrikTahuKita'),
         position: LatLng(-6.3129901, 106.6930228),
         infoWindow: InfoWindow(title: 'Pabrik Tahu Kita'),
-        icon: pinLocationIcon //destinationIcon,
+        icon: destinationIcon //destinationIcon,
         );
     Marker jalanmawar = Marker(
-      markerId: MarkerId('Jl. Mawar'),
+      markerId: MarkerId('JlMawar'),
       position: LatLng(-6.3083565, 106.6943251),
       infoWindow: InfoWindow(title: 'Jl. Mawar'),
       icon: pinLocationIcon,
     );
 
     Marker pabrik4 = Marker(
-        markerId: MarkerId('Pabrik Tahu Pak Tabah'),
+        markerId: MarkerId('PabrikTahuPakTabah'),
         position: LatLng(-6.3332968, 106.7584304),
         infoWindow: InfoWindow(title: 'Pabrik Tahu Pak Tabah'),
-        icon: pinLocationIcon // destinationIcon,
+        icon: destinationIcon // destinationIcon,
         );
     Marker jalantalas = Marker(
-      markerId: MarkerId('Jl. Talas'),
+      markerId: MarkerId('JlTalas'),
       position: LatLng(-6.3264147, 106.7629380),
       infoWindow: InfoWindow(title: 'Jl. Talas'),
       icon: pinLocationIcon,
     );
 
     Marker pabrik5 = Marker(
-        markerId: MarkerId('Pabrik Tahu Ahum/Gembor'),
+        markerId: MarkerId('PabrikTahuAhum/Gembor'),
         position: LatLng(-6.3011249, 106.7081599),
         infoWindow: InfoWindow(title: 'Pabrik Tahu Ahum/Gembor'),
-        icon: pinLocationIcon //destinationIcon,
+        icon: destinationIcon //destinationIcon,
         );
     Marker jalanmerpati = Marker(
-      markerId: MarkerId('Jl. Merpati'),
+      markerId: MarkerId('JlMerpati'),
       position: LatLng(-6.3028995, 106.7180412),
       infoWindow: InfoWindow(title: 'Jl. Merpati'),
       icon: pinLocationIcon,
@@ -214,12 +214,12 @@ class _MapshowState extends State<Mapshow> {
                 infoWindow: InfoWindow(title: 'Location'),
               ));
 
-              /*_markers.add(Marker(
-                  markerId: MarkerId(_lastMapPosition.toString()),
-                  visible: true,
-                  position: _lastMapPosition,
-                  icon: pinLocationIcon //destinationIcon,
-                  ));*/
+              _markers.add(Marker(
+                markerId: MarkerId(_lastMapPosition.toString()),
+                visible: true,
+                position: _lastMapPosition,
+                icon: destinationIcon,
+              ));
             });
           },
         ),
