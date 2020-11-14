@@ -20,13 +20,13 @@ class ImageAndIcons extends StatelessWidget {
         height: size.height * 0.8,
         child: Row(
           children: <Widget>[
-            Expanded(
+            /* Expanded(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: kDefaultPadding * 3),
                 child: Column(
                   children: <Widget>[
-                    Align(
+                    /* Align(
                       alignment: Alignment.topLeft,
                       child: IconButton(
                         padding:
@@ -36,7 +36,7 @@ class ImageAndIcons extends StatelessWidget {
                           Navigator.pop(context);
                         },
                       ),
-                    ),
+                    ), */
                     Spacer(),
                     IconCard(icon: "assets/icons/sun.svg"),
                     IconCard(icon: "assets/icons/icon_2.svg"),
@@ -45,14 +45,17 @@ class ImageAndIcons extends StatelessWidget {
                   ],
                 ),
               ),
-            ),
+            ), */
             Container(
               height: size.height * 0.8,
-              width: size.width * 0.75,
+              width: size.width * 0.95,
+              alignment: Alignment.topCenter,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(63),
-                  bottomLeft: Radius.circular(63),
+                  /* topLeft: Radius.circular(63),
+                  bottomLeft: Radius.circular(63), */
+                  topRight: Radius.circular(63),
+                  bottomRight: Radius.circular(63),
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -64,7 +67,7 @@ class ImageAndIcons extends StatelessWidget {
                 image: DecorationImage(
                   alignment: Alignment.centerLeft,
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/images/img.png"),
+                  image: AssetImage("assets/images/d1.png"),
                 ),
               ),
             ),

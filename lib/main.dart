@@ -3,7 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:TA_Maps/MappingPage.dart';
 
 void main() {
-  runApp(gotahu());
+  //runApp(gotahu());
+  runApp(MaterialApp(
+    initialRoute: '/',
+    routes: {
+      '/': (context) => gotahu(),
+      MapPage.routeName: (context) => MapPage(),
+    },
+  ));
 }
 
 class gotahu extends StatelessWidget {
@@ -12,9 +19,10 @@ class gotahu extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DetailsScreen(),
+      /*initialRoute: '/',
       routes: {
-        MapPage.routeName: (ctx) => MapPage(),
-      },
+        MapPage.routeName: (context) => MapPage(),
+      },*/
     );
   }
 }

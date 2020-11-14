@@ -13,7 +13,8 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ImageAndIcons(size: size),
-          TitleAndPrice(title: "Hallo,", country: "Putri"),
+          TitleAndPrice(
+              title: "Hallo,", country: "Yuk! Temukan Pabrik Tahu Terdekat"),
           SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
@@ -28,10 +29,14 @@ class Body extends StatelessWidget {
                   ),
                   color: kPrimaryColor,
                   onPressed: () {
-                    Navigator.of(context).pushNamed(MapPage.routeName);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MapPage()));
                   },
+                  /*onPressed: () {
+                    Navigator.of(context).pushNamed(MapPage.routeName);
+                  },*/
                   child: Text(
-                    "Home",
+                    "Maps",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,

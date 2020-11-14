@@ -8,9 +8,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class MapPage extends StatelessWidget {
-  static const routeName = 'MapPage';
+  static const routeName = "/MapPage";
   @override
   Widget build(BuildContext context) {
+    final MapPage args = ModalRoute.of(context).settings.arguments;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Go-Tahu',
