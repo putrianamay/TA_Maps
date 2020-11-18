@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_maps_flutter:
-  location: ^2.3.5
+  location: ^3.0.0
   flutter_polyline_points: ^0.1.0
   cupertino_icons: ^1.0.0
   bubble_bottom_bar: ^1.2.0

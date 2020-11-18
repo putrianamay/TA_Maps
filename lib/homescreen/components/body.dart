@@ -27,14 +27,11 @@ class Body extends StatelessWidget {
                       topRight: Radius.circular(20),
                     ),
                   ),
-                  color: kPrimaryColor,
+                  color: Colors.white,
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MapPage()));
+                    /* Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MapPage())); */
                   },
-                  /*onPressed: () {
-                    Navigator.of(context).pushNamed(MapPage.routeName);
-                  },*/
                   child: Text(
                     "Maps",
                     style: TextStyle(
@@ -46,8 +43,28 @@ class Body extends StatelessWidget {
               ),
               Expanded(
                 child: FlatButton(
-                  onPressed: () {},
-                  child: Text("Maps"),
+                  minWidth: 1,
+                  height: 70,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  color: Colors.blue,
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MapPage()));
+                  },
+                  child: Text(
+                    "Maps",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
                 ),
               ),
             ],

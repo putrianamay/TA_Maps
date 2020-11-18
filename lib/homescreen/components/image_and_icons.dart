@@ -61,13 +61,13 @@ class ImageAndIcons extends StatelessWidget {
                   BoxShadow(
                     offset: Offset(0, 10),
                     blurRadius: 60,
-                    color: kPrimaryColor.withOpacity(0.29),
+                    color: Colors.blue.withOpacity(0.29),
                   ),
                 ],
                 image: DecorationImage(
                   alignment: Alignment.centerLeft,
                   fit: BoxFit.cover,
-                  image: AssetImage("assets/images/d1.png"),
+                  image: AssetImage("assets/images/d2.png"),
                 ),
               ),
             ),

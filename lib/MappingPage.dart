@@ -228,12 +228,14 @@ class _MapshowState extends State<Mapshow> {
           animatedIcon: AnimatedIcons.menu_close,
           curve: Curves.fastOutSlowIn,
           animatedIconTheme: IconThemeData.fallback(),
+          overlayColor: Colors.white10,
           children: [
             SpeedDialChild(
                 label: 'Pabrik Tahu Amin (DY)',
                 child: FloatingActionButton(
                   shape: CircleBorder(),
-                  child: Image.asset(''),
+                  focusColor: Colors.white24,
+                  child: Image.asset("assets/icons/factory2.png"),
                   onPressed: () {
                     _gotoTA1();
                     setState(() {
@@ -251,7 +253,7 @@ class _MapshowState extends State<Mapshow> {
                 label: 'Pabrik Tahu Na Po Tet',
                 child: FloatingActionButton(
                   shape: CircleBorder(),
-                  child: Image.asset(''),
+                  child: Image.asset("assets/icons/factoryicon.jpg"),
                   onPressed: () {
                     _gotoTA2();
                     setState(() {
@@ -267,9 +269,10 @@ class _MapshowState extends State<Mapshow> {
                 )),
             SpeedDialChild(
                 label: 'Pabrik Tahu Kita',
+                backgroundColor: Colors.lightBlue[100],
                 child: FloatingActionButton(
                   shape: CircleBorder(),
-                  child: Image.asset(''),
+                  child: Image.asset("assets/icons/factory5.png"),
                   onPressed: () {
                     _gotoTA3();
                     setState(() {
@@ -287,7 +290,7 @@ class _MapshowState extends State<Mapshow> {
                 label: 'Pabrik Tahu Pak Tabah',
                 child: FloatingActionButton(
                   shape: CircleBorder(),
-                  child: Image.asset(''),
+                  child: Image.asset("assets/icons/factory3.png"),
                   onPressed: () {
                     _gotoTA4();
                     setState(() {
@@ -305,7 +308,7 @@ class _MapshowState extends State<Mapshow> {
                 label: 'Pabrik Tahu Ahum/Gembor',
                 child: FloatingActionButton(
                   shape: CircleBorder(),
-                  child: Image.asset(''),
+                  child: Image.asset("assets/icons/factory4.png"),
                   onPressed: () {
                     _gotoTA5();
                     setState(() {

@@ -33,7 +33,7 @@ class TitleAndPrice extends StatelessWidget {
                   text: country,
                   style: TextStyle(
                     fontSize: 15,
-                    color: kPrimaryColor,
+                    color: Colors.blue,
                     fontWeight: FontWeight.w300,
                   ),
                 ),
