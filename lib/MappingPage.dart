@@ -54,7 +54,8 @@ class _MapshowState extends State<Mapshow> {
   }
 
   static final CameraPosition TA1 = CameraPosition(
-    target: LatLng(-6.266853, 106.702360), //Jl. Kali Ji'un - Pabrik 1
+    target: LatLng(
+        -6.328185703037008, 106.72185703594586), //Jl. Kali Ji'un - Pabrik 1
     zoom: 18.151926040649414,
     tilt: 59.440717697143555,
     bearing: 192.8334901395799,
@@ -66,7 +67,8 @@ class _MapshowState extends State<Mapshow> {
   }
 
   static final CameraPosition TA2 = CameraPosition(
-    target: LatLng(-6.3467426, 106.7103855), //Jl. Puspiptek - Pabrik 2
+    target: LatLng(
+        -6.328185703037008, 106.72185703594586), //Jl. Puspiptek - Pabrik 2
     zoom: 18.151926040649414,
     tilt: 59.440717697143555,
     bearing: 192.8334901395799,
@@ -78,7 +80,8 @@ class _MapshowState extends State<Mapshow> {
   }
 
   static final CameraPosition TA3 = CameraPosition(
-    target: LatLng(-6.3083565, 106.6943251), //Jl. Mawar - Pabrik 3
+    target:
+        LatLng(-6.328185703037008, 106.72185703594586), //Jl. Mawar - Pabrik 3
     zoom: 18.151926040649414,
     tilt: 59.440717697143555,
     bearing: 192.8334901395799,
@@ -90,7 +93,8 @@ class _MapshowState extends State<Mapshow> {
   }
 
   static final CameraPosition TA4 = CameraPosition(
-    target: LatLng(-6.3264147, 106.7629380), //Jl. Talas - Pabrik 4
+    target:
+        LatLng(-6.328185703037008, 106.72185703594586), //Jl. Talas - Pabrik 4
     zoom: 18.151926040649414,
     tilt: 59.440717697143555,
     bearing: 192.8334901395799,
@@ -102,7 +106,7 @@ class _MapshowState extends State<Mapshow> {
   }
 
   static final CameraPosition TA5 = CameraPosition(
-    target: LatLng(-6.3028995, 106.7180412), //Jl. Merpati - Pabrik 5
+    target: LatLng(-6.328185703037008, 106.72185703594586), //rumah
     zoom: 18.151926040649414,
     tilt: 59.440717697143555,
     bearing: 192.8334901395799,
@@ -120,12 +124,12 @@ class _MapshowState extends State<Mapshow> {
         infoWindow: InfoWindow(title: 'Pabrik Tahun Amin (DY)'),
         icon: destinationIcon //destinationIcon,
         );
-    Marker jalankalijiun = Marker(
+    /*   Marker jalankalijiun = Marker(
       markerId: MarkerId('JlKaliJiun'),
       position: LatLng(-6.266853, 106.702360),
       infoWindow: InfoWindow(title: 'Jl. Kali Jiun'),
       icon: pinLocationIcon,
-    );
+    ); */
 
     Marker pabrik2 = Marker(
         markerId: MarkerId('PabrikTahuNaPoTet'),
@@ -133,25 +137,25 @@ class _MapshowState extends State<Mapshow> {
         infoWindow: InfoWindow(title: 'Pabrik Tahu Na Po Tet'),
         icon: destinationIcon // destinationIcon,
         );
-    Marker jalanpuspiptek = Marker(
+    /*    Marker jalanpuspiptek = Marker(
       markerId: MarkerId('JlPuspiptek'),
       position: LatLng(-6.3467426, 106.7103855),
       infoWindow: InfoWindow(title: 'Jl. Puspiptek'),
       icon: pinLocationIcon,
-    );
+    ); */
 
     Marker pabrik3 = Marker(
         markerId: MarkerId('PabrikTahuKita'),
-        position: LatLng(-6.3129901, 106.6930228),
+        position: LatLng(-6.312989367932342, 106.6930234255184),
         infoWindow: InfoWindow(title: 'Pabrik Tahu Kita'),
         icon: destinationIcon //destinationIcon,
         );
-    Marker jalanmawar = Marker(
+    /*   Marker jalanmawar = Marker(
       markerId: MarkerId('JlMawar'),
       position: LatLng(-6.3083565, 106.6943251),
       infoWindow: InfoWindow(title: 'Jl. Mawar'),
       icon: pinLocationIcon,
-    );
+    ); */
 
     Marker pabrik4 = Marker(
         markerId: MarkerId('PabrikTahuPakTabah'),
@@ -159,23 +163,28 @@ class _MapshowState extends State<Mapshow> {
         infoWindow: InfoWindow(title: 'Pabrik Tahu Pak Tabah'),
         icon: destinationIcon // destinationIcon,
         );
-    Marker jalantalas = Marker(
+    /*   Marker jalantalas = Marker(
       markerId: MarkerId('JlTalas'),
       position: LatLng(-6.3264147, 106.7629380),
       infoWindow: InfoWindow(title: 'Jl. Talas'),
       icon: pinLocationIcon,
-    );
+    ); */
 
     Marker pabrik5 = Marker(
         markerId: MarkerId('PabrikTahuAhum/Gembor'),
-        position: LatLng(-6.3011249, 106.7081599),
+        position: LatLng(-6.30110820944125, 106.70817012941153),
         infoWindow: InfoWindow(title: 'Pabrik Tahu Ahum/Gembor'),
         icon: destinationIcon //destinationIcon,
         );
-    Marker jalanmerpati = Marker(
+/*     Marker jalanmerpati = Marker(
       markerId: MarkerId('JlMerpati'),
       position: LatLng(-6.3028995, 106.7180412),
       infoWindow: InfoWindow(title: 'Jl. Merpati'),
+      icon: pinLocationIcon, */
+    Marker rumah = Marker(
+      markerId: MarkerId('Bendabaru'),
+      position: LatLng(-6.328185703037008, 106.72185703594586),
+      infoWindow: InfoWindow(title: 'Benda Baru'),
       icon: pinLocationIcon,
     );
 
@@ -187,15 +196,16 @@ class _MapshowState extends State<Mapshow> {
           compassEnabled: true,
           markers: {
             pabrik1,
-            jalankalijiun,
+            //jalankalijiun,
             pabrik2,
-            jalanpuspiptek,
+            //jalanpuspiptek,
             pabrik3,
-            jalanmawar,
+            //jalanmawar,
             pabrik4,
-            jalantalas,
+            // jalantalas,
             pabrik5,
-            jalanmerpati
+            rumah
+            //jalanmerpati
           },
           polylines: _polyline,
           mapType: MapType.normal,
@@ -279,7 +289,7 @@ class _MapshowState extends State<Mapshow> {
                       _polyline.add(Polyline(
                         polylineId: PolylineId(_lastMapPosition.toString()),
                         visible: true,
-                        points: latlngpabrik3,
+                        points: latlngpabrikita,
                         color: Colors.blue,
                         width: 5,
                       ));
@@ -315,7 +325,7 @@ class _MapshowState extends State<Mapshow> {
                       _polyline.add(Polyline(
                         polylineId: PolylineId(_lastMapPosition.toString()),
                         visible: true,
-                        points: latlngpabrik5,
+                        points: latlngpabrikahum,
                         color: Colors.blue,
                         width: 5,
                       ));
