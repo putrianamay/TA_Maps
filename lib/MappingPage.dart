@@ -252,7 +252,7 @@ class _MapshowState extends State<Mapshow> {
                       _polyline.add(Polyline(
                         polylineId: PolylineId(_lastMapPosition.toString()),
                         visible: true,
-                        points: latlngpabrik1,
+                        points: latlngpabrikamin,
                         color: Colors.blue,
                         width: 5,
                       ));
@@ -270,7 +270,7 @@ class _MapshowState extends State<Mapshow> {
                       _polyline.add(Polyline(
                         polylineId: PolylineId(_lastMapPosition.toString()),
                         visible: true,
-                        points: latlngpabrik2,
+                        points: latlngpabriknapotet,
                         color: Colors.blue,
                         width: 5,
                       ));
@@ -307,7 +307,7 @@ class _MapshowState extends State<Mapshow> {
                       _polyline.add(Polyline(
                         polylineId: PolylineId(_lastMapPosition.toString()),
                         visible: true,
-                        points: latlngpabrik4,
+                        points: latlngpabriktabah,
                         color: Colors.blue,
                         width: 5,
                       ));
