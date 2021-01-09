@@ -11,7 +11,6 @@ class MapPage extends StatelessWidget {
   static const routeName = "/MapPage";
   @override
   Widget build(BuildContext context) {
-    final MapPage args = ModalRoute.of(context).settings.arguments;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Go-Tahu',
@@ -114,7 +113,6 @@ class _MapshowState extends State<Mapshow> {
 
   @override
   Widget build(BuildContext context) {
-    Map markers = {};
     LatLng _lastMapPosition = _center;
     LatLng pinPosition = LatLng(-6.266853, 106.702360);
 
@@ -234,105 +232,108 @@ class _MapshowState extends State<Mapshow> {
             });
           },
         ),
-        floatingActionButton: SpeedDial(
-          animatedIcon: AnimatedIcons.menu_close,
-          curve: Curves.fastOutSlowIn,
-          animatedIconTheme: IconThemeData.fallback(),
-          overlayColor: Colors.white10,
-          children: [
-            SpeedDialChild(
-                label: 'Pabrik Tahu Amin (DY)',
-                child: FloatingActionButton(
-                  shape: CircleBorder(),
-                  focusColor: Colors.white24,
-                  child: Image.asset("assets/icons/factory2.png"),
-                  onPressed: () {
-                    _gotoTA1();
-                    setState(() {
-                      _polyline.add(Polyline(
-                        polylineId: PolylineId(_lastMapPosition.toString()),
-                        visible: true,
-                        points: latlngpabrikamin,
-                        color: Colors.blue,
-                        width: 5,
-                      ));
-                    });
-                  },
-                )),
-            SpeedDialChild(
-                label: 'Pabrik Tahu Na Po Tet',
-                child: FloatingActionButton(
-                  shape: CircleBorder(),
-                  child: Image.asset("assets/icons/factoryicon.jpg"),
-                  onPressed: () {
-                    _gotoTA2();
-                    setState(() {
-                      _polyline.add(Polyline(
-                        polylineId: PolylineId(_lastMapPosition.toString()),
-                        visible: true,
-                        points: latlngpabriknapotet,
-                        color: Colors.blue,
-                        width: 5,
-                      ));
-                    });
-                  },
-                )),
-            SpeedDialChild(
-                label: 'Pabrik Tahu Kita',
-                backgroundColor: Colors.lightBlue[100],
-                child: FloatingActionButton(
-                  shape: CircleBorder(),
-                  child: Image.asset("assets/icons/factory5.png"),
-                  onPressed: () {
-                    _gotoTA3();
-                    setState(() {
-                      _polyline.add(Polyline(
-                        polylineId: PolylineId(_lastMapPosition.toString()),
-                        visible: true,
-                        points: latlngpabrikita,
-                        color: Colors.blue,
-                        width: 5,
-                      ));
-                    });
-                  },
-                )),
-            SpeedDialChild(
-                label: 'Pabrik Tahu Pak Tabah',
-                child: FloatingActionButton(
-                  shape: CircleBorder(),
-                  child: Image.asset("assets/icons/factory3.png"),
-                  onPressed: () {
-                    _gotoTA4();
-                    setState(() {
-                      _polyline.add(Polyline(
-                        polylineId: PolylineId(_lastMapPosition.toString()),
-                        visible: true,
-                        points: latlngpabriktabah,
-                        color: Colors.blue,
-                        width: 5,
-                      ));
-                    });
-                  },
-                )),
-            SpeedDialChild(
-                label: 'Pabrik Tahu Ahum/Gembor',
-                child: FloatingActionButton(
-                  shape: CircleBorder(),
-                  child: Image.asset("assets/icons/factory4.png"),
-                  onPressed: () {
-                    _gotoTA5();
-                    setState(() {
-                      _polyline.add(Polyline(
-                        polylineId: PolylineId(_lastMapPosition.toString()),
-                        visible: true,
-                        points: latlngpabrikahum,
-                        color: Colors.blue,
-                        width: 5,
-                      ));
-                    });
-                  },
-                )),
-          ],
+        floatingActionButton: Center(
+          child: SpeedDial(
+            marginRight: 64,
+            animatedIcon: AnimatedIcons.menu_close,
+            curve: Curves.fastOutSlowIn,
+            animatedIconTheme: IconThemeData.fallback(),
+            overlayColor: Colors.white10,
+            children: [
+              SpeedDialChild(
+                  label: 'Pabrik Tahu Amin (DY)',
+                  child: FloatingActionButton(
+                    shape: CircleBorder(),
+                    focusColor: Colors.white24,
+                    child: Image.asset("assets/icons/factory2.png"),
+                    onPressed: () {
+                      _gotoTA1();
+                      setState(() {
+                        _polyline.add(Polyline(
+                          polylineId: PolylineId(_lastMapPosition.toString()),
+                          visible: true,
+                          points: latlngpabrikamin,
+                          color: Colors.blue,
+                          width: 5,
+                        ));
+                      });
+                    },
+                  )),
+              SpeedDialChild(
+                  label: 'Pabrik Tahu Na Po Tet',
+                  child: FloatingActionButton(
+                    shape: CircleBorder(),
+                    child: Image.asset("assets/icons/factoryicon.jpg"),
+                    onPressed: () {
+                      _gotoTA2();
+                      setState(() {
+                        _polyline.add(Polyline(
+                          polylineId: PolylineId(_lastMapPosition.toString()),
+                          visible: true,
+                          points: latlngpabriknapotet,
+                          color: Colors.blue,
+                          width: 5,
+                        ));
+                      });
+                    },
+                  )),
+              SpeedDialChild(
+                  label: 'Pabrik Tahu Kita',
+                  backgroundColor: Colors.lightBlue[100],
+                  child: FloatingActionButton(
+                    shape: CircleBorder(),
+                    child: Image.asset("assets/icons/factory5.png"),
+                    onPressed: () {
+                      _gotoTA3();
+                      setState(() {
+                        _polyline.add(Polyline(
+                          polylineId: PolylineId(_lastMapPosition.toString()),
+                          visible: true,
+                          points: latlngpabrikita,
+                          color: Colors.blue,
+                          width: 5,
+                        ));
+                      });
+                    },
+                  )),
+              SpeedDialChild(
+                  label: 'Pabrik Tahu Pak Tabah',
+                  child: FloatingActionButton(
+                    shape: CircleBorder(),
+                    child: Image.asset("assets/icons/factory3.png"),
+                    onPressed: () {
+                      _gotoTA4();
+                      setState(() {
+                        _polyline.add(Polyline(
+                          polylineId: PolylineId(_lastMapPosition.toString()),
+                          visible: true,
+                          points: latlngpabriktabah,
+                          color: Colors.blue,
+                          width: 5,
+                        ));
+                      });
+                    },
+                  )),
+              SpeedDialChild(
+                  label: 'Pabrik Tahu Ahum/Gembor',
+                  child: FloatingActionButton(
+                    shape: CircleBorder(),
+                    child: Image.asset("assets/icons/factory4.png"),
+                    onPressed: () {
+                      _gotoTA5();
+                      setState(() {
+                        _polyline.add(Polyline(
+                          polylineId: PolylineId(_lastMapPosition.toString()),
+                          visible: true,
+                          points: latlngpabrikahum,
+                          color: Colors.blue,
+                          width: 5,
+                        ));
+                      });
+                    },
+                  )),
+            ],
+          ),
         ),
       ),
     );

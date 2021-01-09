@@ -18,28 +18,33 @@ class Body extends StatelessWidget {
           SizedBox(height: kDefaultPadding),
           Row(
             children: <Widget>[
-              SizedBox(
-                width: size.width / 2,
-                height: 84,
+              Expanded(
                 child: FlatButton(
+                  minWidth: 1,
+                  height: 70,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
+                      topLeft: Radius.circular(20),
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
                     ),
                   ),
-                  color: Colors.white,
-                  onPressed: () {
-                    /* Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MapPage())); */
-                  },
+                  color: Colors.blue,
+                  highlightColor: Colors.red,
+                  splashColor: Colors.red,
+                  onPressed: () => buttonTentangAplikasi(context),
                   child: Text(
-                    "Maps",
+                    "Tentang Aplikasi",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                width: 16,
               ),
               Expanded(
                 child: FlatButton(
@@ -54,6 +59,8 @@ class Body extends StatelessWidget {
                     ),
                   ),
                   color: Colors.blue,
+                  highlightColor: Colors.red,
+                  splashColor: Colors.red,
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MapPage()));
@@ -73,4 +80,23 @@ class Body extends StatelessWidget {
       ),
     );
   }
+}
+
+buttonTentangAplikasi(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) => AlertDialog(
+      title: Text('Tentang Aplikasi'),
+      content: Text(
+          'Aplikasi GoTahu merupakan aplikasi pencarian jalur terpendek menuju pabrik tahu yang berada di Tangerang Selatan dengan mengimplementasikan algoritma Dijkstra. Pada aplikasi ini terdapat 5 pabrik dari satu titik awal.'),
+      actions: [
+        FlatButton(
+          child: Text("OK"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    ),
+  );
 }

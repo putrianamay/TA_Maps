@@ -1,4 +1,4 @@
-import 'package:TA_Maps/home_details_screen.dart';
+import 'package:TA_Maps/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:TA_Maps/MappingPage.dart';
 
@@ -7,18 +7,18 @@ void main() {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/': (context) => gotahu(),
+      '/': (context) => Gotahu(),
       MapPage.routeName: (context) => MapPage(),
     },
   ));
 }
 
-class gotahu extends StatelessWidget {
+class Gotahu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: DetailsScreen(),
+      home: SplashPage(),
       /*initialRoute: '/',
       routes: {
         MapPage.routeName: (context) => MapPage(),
